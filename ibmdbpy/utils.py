@@ -217,8 +217,7 @@ def check_tablename(tablename):
     tablename = check_case(tablename)
     for char in tablename:
         if not (char.isalnum() | (char == '"') | (char == '_') | (char == '.')):
-            print char
-            sys.stdout.flush()
+            warnings.warn("bla: " + char, UserWarning)
             #raise ValueError("Table name is not valid, only alphanumeric characters and underscores are allowed!!!")
     
     if tablename.count(".") > 1:
