@@ -218,7 +218,7 @@ def check_tablename(tablename):
     for char in tablename:
         if not (char.isalnum() | (char == '"') | (char == '_') | (char == '.')):
             warnings.warn("bla: " + char, UserWarning)
-            #raise ValueError("Table name is not valid, only alphanumeric characters and underscores are allowed!!!")
+            raise ValueError("Table name is not valid, only alphanumeric characters and underscores are allowed!!! " + char)
     
     if tablename.count(".") > 1:
         raise ValueError("Table name is not valid, only one '.' character is allowed.")
