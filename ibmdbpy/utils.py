@@ -215,10 +215,13 @@ def check_tablename(tablename):
         be separated by underscores (“_”) characters.
     """
     tablename = check_case(tablename)
-    if not all([(char.isalnum() | (char == '"') | (char == '_') | (char == '.')) for char in tablename]):
-        raise ValueError("Table name is not valid, only alphanumeric characters and underscores are allowed.")
+    for char in tablename:
+        if not (char.isalnum() | (char == '"') | (char == '_') | (char == '.')):
+            raise ValueError("Table name is not valid, only alphanumeric characters and underscores are allowed: " + char)
+    
     if tablename.count(".") > 1:
         raise ValueError("Table name is not valid, only one '.' character is allowed.")
+    
     return tablename
 
 def check_viewname(viewname):
