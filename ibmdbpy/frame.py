@@ -145,7 +145,7 @@ class IdaDataFrame(object):
         if not idadb.__class__.__name__ == "IdaDataBase":
             idadb_class = idadb.__class__.__name__
             raise TypeError("Argument 'idadb' is of type %s, expected : IdaDataBase"%idadb_class)
-        tablename = ibmdbpy.utils.check_case(tablename)
+        #tablename = ibmdbpy.utils.check_case(tablename)
 
         #idadb._reset_attributes("cache_show_tables")
 
@@ -993,6 +993,7 @@ class IdaDataFrame(object):
         Prepare, execute and format the result of a query in a data frame or in 
         a tuple. See the IdaDataBase.ida_query documentation.
         """
+        print("query %s "%query)
         return self._idadb.ida_query(query, silent, first_row_only, autocommit)
 
     def ida_scalar_query(self, query, silent = False, autocommit = False):
@@ -1068,6 +1069,7 @@ class IdaDataFrame(object):
                         order = " ORDER BY \"" + column + "\" ASC"
                     else:
                         order = ''
+            print("name %s order %s"%(name, order))
             data = self.ida_query("SELECT * FROM %s%s FETCH FIRST %s ROWS ONLY"%(name, order, nrow))
 
             if data.shape[0] != 0:
@@ -2067,6 +2069,7 @@ class IdaDataFrame(object):
         tablename = self.internal_state.current_state
         if self._idadb._con_type == 'odbc':
             if '.' in tablename:
+                print("Tablename", tablename)
                 tablename = tablename.split('.')[-1]
             columns = self._idadb._con.cursor().columns(table=tablename)
             columnlist = [column[3] for column in columns]

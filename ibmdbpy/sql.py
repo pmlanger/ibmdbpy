@@ -78,6 +78,7 @@ def ida_query(idadb, query, silent=False, first_row_only=False, autocommit = Fal
     _ida_query_JDBC()
     """
     if idadb._con_type == 'odbc':
+        print("query sql %s "%query)
         return _ida_query_ODBC(idadb, query, silent, first_row_only, autocommit)
     else:
         return _ida_query_JDBC(idadb, query, silent, first_row_only, autocommit)
@@ -90,7 +91,9 @@ def _ida_query_ODBC(idadb, query, silent, first_row_only, autocommit):
     """
     cursor = idadb._con.cursor()
     try:
+        print("before prepare query %s "%query)
         query = _prepare_query(query, silent)
+        print("pepared query sql %s "%query)
         cursor.execute(query)
 
         if autocommit is True:

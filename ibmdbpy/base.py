@@ -759,6 +759,7 @@ class IdaDataBase(object):
         returned.
         """
         self._check_connection()
+        print("query base %s "%query)
         return sql.ida_query(self, query, silent, first_row_only, autocommit)
 
     def ida_scalar_query(self, query, silent=False, autocommit = False):
