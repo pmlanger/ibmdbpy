@@ -240,7 +240,7 @@ def check_case(name):
     """
     if name != name.upper():
         warnings.warn("Mixed case names are not supported in database object names.", UserWarning)
-    return name.upper()
+    return name
 
 def _convert_dtypes(idadf, data):
     """
